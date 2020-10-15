@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int reverse(int x) {
+    int r=0;
+
+    while(x!=0){
+        r=r*10+x%10;
+        x=x/10;
+    }
+
+    return r;
+}
+
+int main() {
+    int to_reverse = 123;
+    printf("reverse %d = %d", to_reverse, reverse(to_reverse));
+    return 0;
+}
