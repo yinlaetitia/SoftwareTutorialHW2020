@@ -1,0 +1,64 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+
+int roman_to_int(const char s[], int length) {
+    int n=0,i;
+
+    length=strlen(s);
+    for (i=0;i<length;i++){
+        switch (*(s+i)){
+   case'M':
+    n=n+1000;
+    break;
+   case'D':
+    n=n+500;
+    break;
+   case'C':
+    if(i+1<length&&*(s+i+1)=='D'||*(s+i+1)=='M'){
+                    n=n-100;
+    }
+    else{
+     n=n+100;
+    }
+    break;
+   case'L':
+    n=n+50;
+    break;
+   case'X':
+    if(i+1<length&&*(s+i+1)=='L'||*(s+i+1)=='C'){
+     n=n-10;
+    }
+    else{
+     n=n+10;
+    }
+    break;
+   case'V':
+    n=n+5;
+    break;
+   case'I':
+    if(i+1<length&&*(s+i+1)=='V'||*(s+i+1)=='X'){
+     n=n-1;
+    }
+    else{
+     n=n+1;
+    }
+    break;
+   }
+  }
+    return n;
+
+}
+
+int main() {
+    char roman_num[] = "III";
+    char roman_num_2[] = "CXXIII";
+    char roman_num_3[] = "MMMCDLIX";
+
+    printf("roman_to_int(%s) = %d\n", roman_num,
+           roman_to_int(roman_num, strlen(roman_num)));
+    printf("roman_to_int(%s) = %d\n", roman_num_2,
+           roman_to_int(roman_num_2, strlen(roman_num_2)));
+    printf("roman_to_int(%s) = %d\n", roman_num_3,
+           roman_to_int(roman_num_3, strlen(roman_num_3)));
+}
