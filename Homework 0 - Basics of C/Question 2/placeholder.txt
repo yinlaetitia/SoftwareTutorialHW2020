@@ -1,0 +1,42 @@
+#include <stdint.h>
+#include <stdio.h>
+
+uint64_t factorial(uint32_t f) {
+    uint64_t a,fa=1;
+
+    for(a=1;a<=f;a++){
+        fa=fa*a;
+    }
+
+    return fa;
+}
+
+float _pow(float x, int y) {
+    float j=1;
+    int i;
+
+    for(i=1;i<=y;i++)
+        j=j*x;
+
+    return j;
+}
+
+float taylor_series_sin(float radian) {
+    float sin=0,m;
+    int n,flag=1;
+
+    for(n=1;n<=7;n++){
+        m=_pow(radian,2*n-1)/factorial(2*n-1);
+        sin=sin+flag*m;
+        flag=-flag;
+    }
+
+    return sin;
+}
+
+int main() {
+    const float PI = 3.14159265f;
+    float radian = PI / 3.0f;
+    printf("sin(%f) = %f", radian, taylor_series_sin(radian));
+    return 0;
+}
