@@ -1,0 +1,32 @@
+#include <stdio.h>
+int max_distance(int seats[], int length) ;
+int main() {
+    int seats[] = {0, 1, 1, 0, 0, 0, 0, 0, 1};
+    int length = sizeof(seats) / sizeof(seats[0]);
+    printf("max_distance = %d", max_distance(seats, length));
+    return 0;
+}
+
+int max_distance(int seats[], int length) {
+    int maxdis=0,n=0,i,dis;
+
+    for (i=0;i<*(seats+length);i++) {
+        if(seats[i]==1){
+            if (n==0) {
+                dis=i-n;
+            }
+            else{
+                dis=(i-n+1)/2;
+            }
+            if(dis>maxdis){
+                maxdis=dis;
+            }
+            n=i+1;
+        }
+    }
+    if(*(seats+length)-n>maxdis){
+        maxdis=*(seats+length)-n;
+    }
+
+    return maxdis;
+}
